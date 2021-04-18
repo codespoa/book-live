@@ -10,7 +10,6 @@ export const MongoHelper = {
   },
 
   async connect(uri: string): Promise<void> {
-    console.log(uri)
     return mongoose
       .connect(uri, this.config)
       .then(() => {

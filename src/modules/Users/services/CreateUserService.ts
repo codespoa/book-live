@@ -1,5 +1,3 @@
-import { hash } from 'bcrypt'
-
 import { Encrypter } from '@shared/adapter/Encrypter'
 import { AppError } from '@shared/error'
 import IUsersRepository from '@modules/Users/repositories/IUsersRepository'
@@ -24,8 +22,6 @@ class CreateUserService implements Service {
 
     const encrypter = new Encrypter()
     const passwordHashed = await encrypter.encrypt(password, 12)
-
-    console.log(passwordHashed)
 
     const createAnUser = await this.usersRepository.create({
       name: name,
