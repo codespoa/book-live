@@ -7,7 +7,7 @@ const usersRouter = Router()
 import UsersController from '../controllers/UsersController'
 const usersController = new UsersController()
 
-usersRouter.get('/', usersController.index)
-usersRouter.post('/', usersController.store)
+usersRouter.get('/', ensureAuthenticad, usersController.index)
+usersRouter.post('/', ensureAuthenticad, usersController.store)
 
 export default usersRouter
