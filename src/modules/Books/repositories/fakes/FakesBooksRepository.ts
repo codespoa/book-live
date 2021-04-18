@@ -60,4 +60,12 @@ export default class BooksRepository implements IBooksRepository {
 
     return book
   }
+
+  public async remove(isbn: number): Promise<any> {
+    const findIndex = this.books.findIndex((book) => book.isbn === isbn)
+
+    const removeBook = this.books.splice(findIndex, 1)
+
+    return removeBook
+  }
 }

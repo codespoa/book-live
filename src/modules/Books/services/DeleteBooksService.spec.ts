@@ -1,12 +1,12 @@
 import FakesBooksRepository from '../repositories/fakes/FakesBooksRepository'
-import { CreateBooksService, ReturnAllBooksService } from './'
+import { CreateBooksService, DeleteBooksService } from './'
 
 describe('Delete a Book', () => {
   it('should be able delete a book', async () => {
     const fakeBooksRepository = new FakesBooksRepository()
     const createABook = new CreateBooksService(fakeBooksRepository)
 
-    await createABook.execute({
+    const book = await createABook.execute({
       name: 'A Book',
       author: 'An Author',
       value: 12.5,
@@ -22,9 +22,9 @@ describe('Delete a Book', () => {
       publishing: 'Other the publishing',
     })
 
-    const returnAllBooks = new ReturnAllBooksService(fakeBooksRepository)
+    const deleteAnBook = new DeleteBooksService(fakeBooksRepository)
 
-    const returnAll = await returnAllBooks.execute()
+    const returnAll = await deleteAnBook.execute(Number(book.isbn))
 
     expect(returnAll).toBeTruthy()
   })
