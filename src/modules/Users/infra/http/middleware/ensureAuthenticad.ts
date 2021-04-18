@@ -19,7 +19,7 @@ export default function ensureAuthenticad(
   const authHeader = request.headers.authorization
 
   if (!authHeader) {
-    throw new AppError('Token JWT foi perdido', 401)
+    throw new AppError('JWT Token is missing', 401)
   }
 
   const [, token] = authHeader.split(' ')
@@ -34,6 +34,6 @@ export default function ensureAuthenticad(
 
     return next()
   } catch {
-    throw new AppError('Token JWT inválido', 401)
+    throw new AppError('JWT Token invalid', 401)
   }
 }
