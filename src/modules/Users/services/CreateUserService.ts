@@ -1,5 +1,6 @@
-import { hash } from 'bcryptjs'
+import { hash } from 'bcrypt'
 
+import { Encrypter } from '@shared/adapter/Encrypter'
 import { AppError } from '@shared/error'
 import IUsersRepository from '@modules/Users/repositories/IUsersRepository'
 import ICreateUserDTO from '@modules/Users/dtos/ICreateUserDTO'
@@ -12,18 +13,23 @@ class CreateUserService implements Service {
     this.usersRepository = usersRepository
   }
 
-  public async execute(payload: ICreateUserDTO): Promise<IReturnUserDTO> {
-    const checkUserExists = await this.usersRepository.findByEmail(
-      payload.email
-    )
+  public async execute({
+    email,
+    name,
+    password,
+  }: ICreateUserDTO): Promise<IReturnUserDTO> {
+    const checkUserExists = await this.usersRepository.findByEmail(email)
 
     if (checkUserExists) throw new AppError('This user already in use', 409)
 
-    const passwordHashed = await hash(payload.password, 12)
+    const encrypter = new Encrypter()
+    const passwordHashed = await encrypter.encrypt(password, 12)
+
+    console.log(passwordHashed)
 
     const createAnUser = await this.usersRepository.create({
-      name: payload.name,
-      email: payload.email,
+      name: name,
+      email: email,
       password: passwordHashed,
     })
 
