@@ -5,7 +5,7 @@ import ICreateUserDTO from '@modules/Users/dtos/ICreateUserDTO'
 import IReturnUserDTO from '@modules/Users/dtos/IReturnUserDTO'
 import Service from '@shared/protocols/Service'
 
-class CreateUserService implements Service {
+export class CreateUserService implements Service {
   private usersRepository: IUsersRepository
   constructor(usersRepository: IUsersRepository) {
     this.usersRepository = usersRepository
@@ -32,5 +32,3 @@ class CreateUserService implements Service {
     return createAnUser
   }
 }
-
-export default CreateUserService

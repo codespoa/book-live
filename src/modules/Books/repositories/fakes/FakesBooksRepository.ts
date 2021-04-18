@@ -29,9 +29,7 @@ export default class BooksRepository implements IBooksRepository {
     return allBooks
   }
 
-  public async findByIsbn(
-    isbn: number
-  ): Promise<IReturnBookDTO | IReturnBookDTO[] | undefined> {
+  public async findByIsbn(isbn: number): Promise<IReturnBookDTO | undefined> {
     const findBook = this.books.find((book) => book.isbn === isbn)
 
     return findBook

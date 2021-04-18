@@ -14,7 +14,7 @@ interface ResponseUser {
   user: Object
   token: string
 }
-class AuthenticateUserService implements Service {
+export class AuthenticateUserService implements Service {
   private usersRepository: IUsersRepository
   constructor(usersRepository: IUsersRepository) {
     this.usersRepository = usersRepository
@@ -44,5 +44,3 @@ class AuthenticateUserService implements Service {
     }
   }
 }
-
-export default AuthenticateUserService

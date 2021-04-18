@@ -4,6 +4,4 @@ export default interface ICreateBookDTO {
   value: number
   isbn: number
   publishing: string
-  rented_name: string
-  rented: boolean
 }

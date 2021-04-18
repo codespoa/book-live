@@ -2,7 +2,7 @@ import IUsersRepository from '@modules/Users/repositories/IUsersRepository'
 import IReturnUserDTO from '@modules/Users/dtos/IReturnUserDTO'
 import Service from '@shared/protocols/Service'
 
-class ReturnAllUserService implements Service {
+export class ReturnAllUserService implements Service {
   private usersRepository: IUsersRepository
   constructor(usersRepository: IUsersRepository) {
     this.usersRepository = usersRepository
@@ -12,5 +12,3 @@ class ReturnAllUserService implements Service {
     return await this.usersRepository.getAllUsers()
   }
 }
-
-export default ReturnAllUserService

@@ -1,7 +1,9 @@
 import { Request, Response } from 'express'
 
-import CreateUserService from '@modules/Users/services/CreateUserService'
-import ReturnAllUserService from '@modules/Users/services/ReturnAllUserService'
+import {
+  CreateUserService,
+  ReturnAllUserService,
+} from '@modules/Users/services'
 import UsersRepository from '@modules/Users/infra/mongoose/repositories/UsersRepository'
 import { Controller } from '@shared/protocols'
 

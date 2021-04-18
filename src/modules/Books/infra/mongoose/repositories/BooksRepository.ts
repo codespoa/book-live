@@ -9,13 +9,27 @@ class BooksRepository implements IBooksRepository {
 
     return allBooks
   }
-  public async findByIsbn(
-    isbn: number
-  ): Promise<IReturnBookDTO | IReturnBookDTO[] | undefined> {
-    return new Promise((resolve) => resolve(null))
+  public async findByIsbn(isbn: number): Promise<IReturnBookDTO | undefined> {
+    const findBookByIsbn = await Book.findOne({ isbn })
+
+    return findBookByIsbn
   }
-  public async create(data: ICreateBookDTO): Promise<IReturnBookDTO> {
-    return new Promise((resolve) => resolve(null))
+  public async create({
+    name,
+    author,
+    value,
+    isbn,
+    publishing,
+  }: ICreateBookDTO): Promise<IReturnBookDTO | undefined> {
+    const createAnBook = await Book.create({
+      name,
+      author,
+      isbn,
+      value,
+      publishing,
+    })
+
+    return createAnBook
   }
   public async findById(id: string): Promise<IReturnBookDTO | undefined> {
     return new Promise((resolve) => resolve(null))

@@ -1,8 +1,8 @@
 import { Request, Response } from 'express'
-import { AuthenticateUserService } from '@modules/Users/services'
+import AuthenticateUserService from '@modules/Users/services/AuthenticateUserService'
 import UsersRepository from '@modules/Users/infra/mongoose/repositories/UsersRepository'
 
-export default class SessionsController {
+export default class RentedBooksController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { email, password } = request.body
 

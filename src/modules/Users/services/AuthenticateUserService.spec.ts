@@ -1,14 +1,13 @@
 import { AppError } from '@shared/error'
 
 import FakesUserRepository from '../repositories/fakes/FakesUserRepository'
-import AuthenticateUserService from './AuthenticateUserService'
-import CreateUsersService from './CreateUserService'
+import { AuthenticateUserService, CreateUserService } from './'
 
 describe('AuthenticateUser', () => {
   it('should be able to authenticated an user', async () => {
     const fakeUsersRepository = new FakesUserRepository()
     const authenticateUser = new AuthenticateUserService(fakeUsersRepository)
-    const createUser = new CreateUsersService(fakeUsersRepository)
+    const createUser = new CreateUserService(fakeUsersRepository)
 
     await createUser.execute({
       name: 'John Doe',
@@ -27,7 +26,7 @@ describe('AuthenticateUser', () => {
   it('should fail if email is invalid', async () => {
     const fakeUsersRepository = new FakesUserRepository()
     const authenticateUser = new AuthenticateUserService(fakeUsersRepository)
-    const createUser = new CreateUsersService(fakeUsersRepository)
+    const createUser = new CreateUserService(fakeUsersRepository)
 
     await createUser.execute({
       name: 'John Doe',
@@ -46,7 +45,7 @@ describe('AuthenticateUser', () => {
   it('should fail if password is invalid', async () => {
     const fakeUsersRepository = new FakesUserRepository()
     const authenticateUser = new AuthenticateUserService(fakeUsersRepository)
-    const createUser = new CreateUsersService(fakeUsersRepository)
+    const createUser = new CreateUserService(fakeUsersRepository)
 
     await createUser.execute({
       name: 'John Doe',
@@ -65,7 +64,7 @@ describe('AuthenticateUser', () => {
   it('should fail if login is invalid', async () => {
     const fakeUsersRepository = new FakesUserRepository()
     const authenticateUser = new AuthenticateUserService(fakeUsersRepository)
-    const createUser = new CreateUsersService(fakeUsersRepository)
+    const createUser = new CreateUserService(fakeUsersRepository)
 
     await createUser.execute({
       name: 'John Doe',

@@ -3,10 +3,14 @@ import IReturnBookDTO from '@modules/Books/dtos/IReturnBookDTO'
 
 export default interface IBooksRepository {
   getAllBooks(): Promise<IReturnBookDTO[]> | undefined
-  findByIsbn(
-    isbn: number
-  ): Promise<IReturnBookDTO | IReturnBookDTO[] | undefined>
-  create(data: ICreateBookDTO): Promise<IReturnBookDTO>
+  findByIsbn(isbn: number): Promise<IReturnBookDTO | undefined>
+  create({
+    name,
+    author,
+    value,
+    isbn,
+    publishing,
+  }: ICreateBookDTO): Promise<IReturnBookDTO | undefined>
   findById(id: string): Promise<IReturnBookDTO | undefined>
   // save(user: IcreateUser): Promise<IReturnUserDTO>
   // remove(id: string): Promise<void>

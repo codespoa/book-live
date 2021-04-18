@@ -1,11 +1,10 @@
 import FakesUserRepository from '../repositories/fakes/FakesUserRepository'
-import CreateUsersService from './CreateUserService'
-import ReturnAllUserService from './ReturnAllUserService'
+import { ReturnAllUserService, CreateUserService } from './'
 
 describe('Return All Users', () => {
   it('should be able to return all users', async () => {
     const fakeUsersRepository = new FakesUserRepository()
-    const createUser = new CreateUsersService(fakeUsersRepository)
+    const createUser = new CreateUserService(fakeUsersRepository)
 
     await createUser.execute({
       name: 'John',

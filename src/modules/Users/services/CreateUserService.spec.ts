@@ -1,12 +1,13 @@
 import { AppError } from '@shared/error'
 
 import FakesUserRepository from '../repositories/fakes/FakesUserRepository'
-import CreateUsersService from './CreateUserService'
+
+import { CreateUserService } from './'
 
 describe('CreateUser', () => {
   it('should be able to create a new user', async () => {
     const fakeUsersRepository = new FakesUserRepository()
-    const createUser = new CreateUsersService(fakeUsersRepository)
+    const createUser = new CreateUserService(fakeUsersRepository)
 
     const user = await createUser.execute({
       name: 'John Doe',
@@ -19,7 +20,7 @@ describe('CreateUser', () => {
 
   it('should be not create two users with same email', async () => {
     const fakeUsersRepository = new FakesUserRepository()
-    const createUser = new CreateUsersService(fakeUsersRepository)
+    const createUser = new CreateUserService(fakeUsersRepository)
 
     const user = await createUser.execute({
       name: 'John Doe',
