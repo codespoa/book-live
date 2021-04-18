@@ -10,6 +10,7 @@ const booksController = new BooksController()
 booksRouter.get('/', ensureAuthenticad, booksController.index)
 booksRouter.get('/:isbn', ensureAuthenticad, booksController.show)
 booksRouter.post('/', ensureAuthenticad, booksController.store)
+booksRouter.put('/', ensureAuthenticad, booksController.update)
 booksRouter.delete('/:isbn', ensureAuthenticad, booksController.delete)
 
 export default booksRouter

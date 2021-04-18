@@ -42,6 +42,15 @@ class BooksRepository implements IBooksRepository {
 
     return findBookByIsbn
   }
+
+  public async save({ name, author, isbn, value, publishing }: ICreateBookDTO) {
+    const payload = Object.assign({ name, author, isbn, value, publishing })
+    const book = await Book.findOneAndUpdate({ isbn }, payload, {
+      returnOriginal: false,
+    })
+
+    return book
+  }
 }
 
 export default BooksRepository

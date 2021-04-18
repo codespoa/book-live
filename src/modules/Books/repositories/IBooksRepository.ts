@@ -13,7 +13,13 @@ export default interface IBooksRepository {
   }: ICreateBookDTO): Promise<IReturnBookDTO | undefined>
   findById(id: string): Promise<IReturnBookDTO | undefined>
   remove(isbn: number): Promise<any>
-  // save(user: IcreateUser): Promise<IReturnUserDTO>
+  save({
+    name,
+    author,
+    value,
+    isbn,
+    publishing,
+  }: ICreateBookDTO): Promise<IReturnBookDTO | undefined>
   // favoriteBook(id: string, bookId: string): Promise<any> | undefined
   // unfavoriteBook(id: string, bookId: string): Promise<any> | undefined
 }

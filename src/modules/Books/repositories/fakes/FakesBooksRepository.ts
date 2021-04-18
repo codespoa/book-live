@@ -51,14 +51,19 @@ export default class BooksRepository implements IBooksRepository {
     return book
   }
 
-  public async save(book: IBookInterface): Promise<IReturnBookDTO> {
-    const findIndex = this.books.findIndex(
-      (findBook) => findBook._id === book._id
-    )
+  public async save({
+    name,
+    author,
+    value,
+    isbn,
+    publishing,
+  }: ICreateBookDTO | any): Promise<IReturnBookDTO> {
+    const findIndex = this.books.findIndex((findBook) => findBook.isbn === isbn)
+    const payload = Object.assign({ name, author, isbn, value, publishing })
 
-    this.books[findIndex] = book
+    this.books[findIndex] = payload
 
-    return book
+    return payload
   }
 
   public async remove(isbn: number): Promise<any> {

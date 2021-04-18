@@ -32,7 +32,7 @@ export default class UsersController implements Controller {
   delete(request: Request, response: Response): Promise<Response> {
     return new Promise((resolve) => resolve(null))
   }
-  save(request: Request, response: Response): Promise<Response> {
+  update(request: Request, response: Response): Promise<Response> {
     return new Promise((resolve) => resolve(null))
   }
 }

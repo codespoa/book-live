@@ -5,6 +5,7 @@ import {
   ReturnAllBooksService,
   ShowBooksService,
   DeleteBooksService,
+  UpdateBooksService,
 } from '@modules/Books/services'
 import BooksRepository from '@modules/Books/infra/mongoose/repositories/BooksRepository'
 import { Controller } from '@shared/protocols'
@@ -50,7 +51,18 @@ export default class BooksController implements Controller {
 
     return response.json({ message: 'Book delete on success' })
   }
-  public async save(request: Request, response: Response): Promise<Response> {
-    return new Promise((resolve) => resolve(null))
+  public async update(request: Request, response: Response): Promise<Response> {
+    const { name, author, value, isbn, publishing } = request.body
+
+    const bookRepository = new BooksRepository()
+    const udpateABook = await new UpdateBooksService(bookRepository).execute({
+      name,
+      author,
+      value,
+      isbn,
+      publishing,
+    })
+
+    return response.json(udpateABook)
   }
 }
