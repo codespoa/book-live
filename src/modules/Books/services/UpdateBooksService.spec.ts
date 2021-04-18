@@ -7,7 +7,7 @@ describe('Update Book', () => {
     const fakeBooksRepository = new FakesBooksRepository()
     const createABook = new CreateBooksService(fakeBooksRepository)
 
-    const showBook = await createABook.execute({
+    await createABook.execute({
       name: 'A Book',
       author: 'An Author',
       value: 12.5,
