@@ -1,12 +1,9 @@
-import { compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
-
+import { Encrypter } from '@shared/adapter/Encrypter'
 import configAuth from '@config/auth'
-
 import { AppError } from '@shared/error'
 import IUsersRepository from '@modules/Users/repositories/IUsersRepository'
-
-import User from '@modules/Users/infra/mongoose/entities/User'
+import Service from '@shared/protocols/Service'
 
 interface RequestDTO {
   email: string
@@ -14,36 +11,37 @@ interface RequestDTO {
 }
 
 interface ResponseUser {
-  user: User
+  user: Object
   token: string
 }
-class AuthenticateUserService {
-  constructor() {}
+class AuthenticateUserService implements Service {
+  private usersRepository: IUsersRepository
+  constructor(usersRepository: IUsersRepository) {
+    this.usersRepository = usersRepository
+  }
 
   public async execute({ email, password }: RequestDTO): Promise<ResponseUser> {
-    // const user = await this.usersRepository.findByEmail(email)
-    // if (!user) {
-    //   throw new AppError(
-    //     'Email e/ou senha incorretos, por favor verifique seus dados',
-    //     401
-    //   )
-    // }
-    // const passwordMathed = await compare(password, user.password)
-    // if (!passwordMathed) {
-    //   throw new AppError(
-    //     'Email e/ou senha incorretos, por favor verifique seus dados',
-    //     401
-    //   )
-    // }
-    // const { secret, expiresIn } = configAuth.jwt
-    // const token = sign({}, secret, {
-    //   subject: user.id,
-    //   expiresIn,
-    // })
-    // return {
-    //   user,
-    //   token,
-    // }
+    const user = await this.usersRepository.findByEmail(email)
+    if (!user) {
+      throw new AppError('Email or password invalid', 401)
+    }
+
+    const compareHash = new Encrypter()
+
+    const passwordMatched = await compareHash.compare(password, user.password)
+
+    if (!passwordMatched) {
+      throw new AppError('Email or password invalid', 401)
+    }
+
+    const { secret, expiresIn } = configAuth.jwt
+
+    const token = sign({ subject: user._id, expire: expiresIn }, secret)
+
+    return {
+      user,
+      token,
+    }
   }
 }
 

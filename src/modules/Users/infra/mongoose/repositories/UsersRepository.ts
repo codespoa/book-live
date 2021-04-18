@@ -21,7 +21,7 @@ class UsersRepository implements IUsersRepository {
     return createAnUser
   }
   public async findByEmail(email: string): Promise<IReturnUserDTO | undefined> {
-    const findUser = await User.findOne({ email })
+    const findUser = await User.findOne({ email }).select('+password')
 
     return findUser
   }
