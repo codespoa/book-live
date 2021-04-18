@@ -3,6 +3,7 @@ import IBooksRepository from '@modules/Books/repositories/IBooksRepository'
 import Book from '@modules/Books/infra/mongoose/entities/Book'
 import IReturnBookDTO from '@modules/Books/dtos/IReturnBookDTO'
 import ICreateBookDTO from '@modules/Books/dtos/ICreateBookDTO'
+import ISearchBookDTO from '@modules/Books/dtos/ISearchBookDTO'
 
 export interface IBookInterface {
   name: string
@@ -72,5 +73,26 @@ export default class BooksRepository implements IBooksRepository {
     const removeBook = this.books.splice(findIndex, 1)
 
     return removeBook
+  }
+
+  public async searchBook({
+    name,
+    author,
+    value,
+    isbn,
+    publishing,
+    rented,
+  }: ISearchBookDTO): Promise<any> {
+    const findBook = this.books.find(
+      (book) =>
+        book.name === name ||
+        book.author === author ||
+        book.value === value ||
+        book.isbn === isbn ||
+        book.publishing === publishing ||
+        book.rented === rented
+    )
+
+    return findBook
   }
 }

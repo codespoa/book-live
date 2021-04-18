@@ -1,5 +1,6 @@
 import ICreateBookDTO from '@modules/Books/dtos/ICreateBookDTO'
 import IReturnBookDTO from '@modules/Books/dtos/IReturnBookDTO'
+import ISearchBookDTO from '@modules/Books/dtos/ISearchBookDTO'
 
 export default interface IBooksRepository {
   getAllBooks(): Promise<IReturnBookDTO[]> | undefined
@@ -20,6 +21,14 @@ export default interface IBooksRepository {
     isbn,
     publishing,
   }: ICreateBookDTO): Promise<IReturnBookDTO | undefined>
-  // favoriteBook(id: string, bookId: string): Promise<any> | undefined
+  searchBook({
+    name,
+    author,
+    value,
+    isbn,
+    publishing,
+    rented,
+  }: ISearchBookDTO): Promise<any> | undefined
+  // rentedBook(id: string, bookId: string): Promise<any> | undefined
   // unfavoriteBook(id: string, bookId: string): Promise<any> | undefined
 }

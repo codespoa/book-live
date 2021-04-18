@@ -55,7 +55,7 @@ export default class BooksController implements Controller {
     const { name, author, value, isbn, publishing } = request.body
 
     const bookRepository = new BooksRepository()
-    const udpateABook = await new UpdateBooksService(bookRepository).execute({
+    const updateABook = await new UpdateBooksService(bookRepository).execute({
       name,
       author,
       value,
@@ -63,6 +63,6 @@ export default class BooksController implements Controller {
       publishing,
     })
 
-    return response.json(udpateABook)
+    return response.json(updateABook)
   }
 }

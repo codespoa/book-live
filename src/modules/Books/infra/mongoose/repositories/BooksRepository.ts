@@ -2,6 +2,7 @@ import Book from '@modules/Books/infra/mongoose/entities/Book'
 import IBooksRepository from '@modules/Books/repositories/IBooksRepository'
 import ICreateBookDTO from '@modules/Books/dtos/ICreateBookDTO'
 import IReturnBookDTO from '@modules/Books/dtos/IReturnBookDTO'
+import ISearchBookDTO from '@modules/Books/dtos/ISearchBookDTO'
 
 class BooksRepository implements IBooksRepository {
   public async getAllBooks(): Promise<IReturnBookDTO[]> | undefined {
@@ -47,6 +48,29 @@ class BooksRepository implements IBooksRepository {
     const payload = Object.assign({ name, author, isbn, value, publishing })
     const book = await Book.findOneAndUpdate({ isbn }, payload, {
       returnOriginal: false,
+    })
+
+    return book
+  }
+
+  public async searchBook({
+    name,
+    author,
+    value,
+    isbn,
+    publishing,
+    rented,
+  }: ISearchBookDTO): Promise<any> | undefined {
+    const book = await Book.find({
+      $or: [
+        { name: { $in: name } },
+        { author: { $in: author } },
+        { isbn: { $in: isbn } },
+        { value: { $in: value } },
+        { value: { $in: value } },
+        { publishing: { $in: publishing } },
+        { rented: { $in: rented } },
+      ],
     })
 
     return book
