@@ -32,7 +32,15 @@ class BooksRepository implements IBooksRepository {
     return createAnBook
   }
   public async findById(id: string): Promise<IReturnBookDTO | undefined> {
-    return new Promise((resolve) => resolve(null))
+    const findBookById = await Book.findOne({ id })
+
+    return findBookById
+  }
+
+  public async remove(isbn: number): Promise<IReturnBookDTO | undefined> {
+    const findBookByIsbn = await Book.findOneAndDelete({ isbn })
+
+    return findBookByIsbn
   }
 }
 

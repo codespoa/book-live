@@ -12,8 +12,8 @@ export default interface IBooksRepository {
     publishing,
   }: ICreateBookDTO): Promise<IReturnBookDTO | undefined>
   findById(id: string): Promise<IReturnBookDTO | undefined>
+  remove(isbn: number): Promise<any>
   // save(user: IcreateUser): Promise<IReturnUserDTO>
-  // remove(id: string): Promise<void>
   // favoriteBook(id: string, bookId: string): Promise<any> | undefined
   // unfavoriteBook(id: string, bookId: string): Promise<any> | undefined
 }
