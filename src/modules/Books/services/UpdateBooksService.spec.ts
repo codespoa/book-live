@@ -1,3 +1,4 @@
+import { AppError } from '@shared/error'
 import FakesBooksRepository from '../repositories/fakes/FakesBooksRepository'
 import { UpdateBooksService, CreateBooksService } from '.'
 
@@ -30,5 +31,20 @@ describe('Update Book', () => {
     expect(returnAllBooks).toHaveProperty('value')
     expect(returnAllBooks).toHaveProperty('isbn')
     expect(returnAllBooks).toHaveProperty('publishing')
+  })
+
+  it('should fail if isbn not exists in system', async () => {
+    const fakeBooksRepository = new FakesBooksRepository()
+    const updateABook = new UpdateBooksService(fakeBooksRepository)
+
+    await expect(
+      updateABook.execute({
+        name: 'A Book',
+        author: 'An Author',
+        value: 12.5,
+        isbn: 123,
+        publishing: 'The publishing',
+      })
+    ).rejects.toBeInstanceOf(AppError)
   })
 })
