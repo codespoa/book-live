@@ -8,6 +8,4 @@ export default interface IUsersRepository {
   // findById(id: string): Promise<IReturnUserDTO | undefined>
   // save(user: IcreateUser): Promise<IReturnUserDTO>
   // remove(id: string): Promise<void>
-  // favoriteBook(id: string, bookId: string): Promise<any> | undefined
-  // unfavoriteBook(id: string, bookId: string): Promise<any> | undefined
 }
