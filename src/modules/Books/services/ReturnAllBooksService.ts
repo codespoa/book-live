@@ -1,5 +1,5 @@
 import IBooksRepository from '@modules/Books/repositories/IBooksRepository'
-import IReturnBookDTO from '@modules/Books/dtos/IReturnBookDTO'
+import { IReturnBookDTO } from '@modules/Books/dtos'
 import Service from '@shared/protocols/Service'
 
 export class ReturnAllBooksService implements Service {

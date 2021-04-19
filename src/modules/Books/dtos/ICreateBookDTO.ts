@@ -1,4 +1,4 @@
-export default interface ICreateBookDTO {
+export interface ICreateBookDTO {
   name: string
   author: string
   value: number

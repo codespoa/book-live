@@ -1,4 +1,4 @@
-export default interface ISearchBookDTO {
+export interface ISearchBookDTO {
   name?: string
   author?: string
   value?: number

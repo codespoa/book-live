@@ -1,6 +1,6 @@
 import { AppError } from '@shared/error'
+import { IReturnBookDTO } from '@modules/Books/dtos'
 import IBooksRepository from '@modules/Books/repositories/IBooksRepository'
-import IReturnBookDTO from '@modules/Books/dtos/IReturnBookDTO'
 import Service from '@shared/protocols/Service'
 
 export class ShowBooksService implements Service {

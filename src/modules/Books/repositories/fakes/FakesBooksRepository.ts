@@ -1,9 +1,11 @@
 import { v4 as uuid } from 'uuid'
+import {
+  IReturnBookDTO,
+  ICreateBookDTO,
+  ISearchBookDTO,
+} from '@modules/Books/dtos'
 import IBooksRepository from '@modules/Books/repositories/IBooksRepository'
 import Book from '@modules/Books/infra/mongoose/entities/Book'
-import IReturnBookDTO from '@modules/Books/dtos/IReturnBookDTO'
-import ICreateBookDTO from '@modules/Books/dtos/ICreateBookDTO'
-import ISearchBookDTO from '@modules/Books/dtos/ISearchBookDTO'
 
 export interface IBookInterface {
   name: string
@@ -94,5 +96,16 @@ export default class BooksRepository implements IBooksRepository {
     )
 
     return findBook
+  }
+
+  public async rentedBook(
+    isbn: number,
+    rented: boolean
+  ): Promise<IReturnBookDTO> | undefined {
+    const findIndex = this.books.findIndex((findBook) => findBook.isbn === isbn)
+
+    this.books[findIndex].rented = rented
+
+    return this.books[findIndex]
   }
 }

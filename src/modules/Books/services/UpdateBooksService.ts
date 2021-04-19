@@ -1,7 +1,6 @@
 import { AppError } from '@shared/error'
+import { IReturnBookDTO, ICreateBookDTO } from '@modules/Books/dtos'
 import IBooksRepository from '@modules/Books/repositories/IBooksRepository'
-import IReturnBookDTO from '@modules/Books/dtos/IReturnBookDTO'
-import ICreateBookDTO from '@modules/Books/dtos/ICreateBookDTO'
 import Service from '@shared/protocols/Service'
 
 export class UpdateBooksService implements Service {

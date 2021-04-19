@@ -1,4 +1,4 @@
-export default interface IReturnBookDTO {
+export interface IReturnBookDTO {
   name: string
   author: string
   value: number

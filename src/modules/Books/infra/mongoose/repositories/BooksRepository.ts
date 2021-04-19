@@ -1,8 +1,10 @@
 import Book from '@modules/Books/infra/mongoose/entities/Book'
+import {
+  ICreateBookDTO,
+  IReturnBookDTO,
+  ISearchBookDTO,
+} from '@modules/Books/dtos'
 import IBooksRepository from '@modules/Books/repositories/IBooksRepository'
-import ICreateBookDTO from '@modules/Books/dtos/ICreateBookDTO'
-import IReturnBookDTO from '@modules/Books/dtos/IReturnBookDTO'
-import ISearchBookDTO from '@modules/Books/dtos/ISearchBookDTO'
 
 class BooksRepository implements IBooksRepository {
   public async getAllBooks(): Promise<IReturnBookDTO[]> | undefined {
@@ -74,6 +76,21 @@ class BooksRepository implements IBooksRepository {
     })
 
     return book
+  }
+
+  public async rentedBook(
+    isbn: number,
+    rented: boolean
+  ): Promise<IReturnBookDTO> | undefined {
+    const rentABook = await Book.findOneAndUpdate(
+      { isbn },
+      { rented },
+      {
+        returnOriginal: false,
+      }
+    )
+
+    return rentABook
   }
 }
 
