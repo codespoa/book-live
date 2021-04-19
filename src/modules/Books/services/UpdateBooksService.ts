@@ -20,6 +20,9 @@ export class UpdateBooksService implements Service {
 
     if (!checkBookExists) throw new AppError('This book does not exist', 404)
 
+    if (checkBookExists.rented)
+      throw new AppError('You cannot update this book', 401)
+
     const updateAnBook = await this.booksRepository.save({
       name,
       author,

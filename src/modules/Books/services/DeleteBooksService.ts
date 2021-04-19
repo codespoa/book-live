@@ -14,6 +14,9 @@ export class DeleteBooksService implements Service {
 
     if (!checkBookExists) throw new AppError('This book does not exist', 404)
 
+    if (checkBookExists.rented)
+      throw new AppError('You cannot delete this book', 401)
+
     const deleteAnBook = await this.booksRepository.remove(isbn)
 
     return deleteAnBook
