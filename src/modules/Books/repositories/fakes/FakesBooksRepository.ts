@@ -100,6 +100,7 @@ export default class BooksRepository implements IBooksRepository {
 
   public async rentedBook(
     isbn: number,
+    user_email: string,
     rented: boolean
   ): Promise<IReturnBookDTO> | undefined {
     const findIndex = this.books.findIndex((findBook) => findBook.isbn === isbn)

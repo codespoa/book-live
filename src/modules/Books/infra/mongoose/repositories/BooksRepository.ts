@@ -80,6 +80,7 @@ class BooksRepository implements IBooksRepository {
 
   public async rentedBook(
     isbn: number,
+    user_email: string,
     rented: boolean
   ): Promise<IReturnBookDTO> | undefined {
     const rentABook = await Book.findOneAndUpdate(

@@ -32,6 +32,10 @@ export default interface IBooksRepository {
     publishing,
     rented,
   }: ISearchBookDTO): Promise<any> | undefined
-  rentedBook(isbn: number, rented: boolean): Promise<any> | undefined
+  rentedBook(
+    isbn: number,
+    user_email: string,
+    rented: boolean
+  ): Promise<any> | undefined
   // unrentedBook(id: string, bookId: string): Promise<any> | undefined
 }

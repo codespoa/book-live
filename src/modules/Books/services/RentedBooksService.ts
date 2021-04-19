@@ -28,7 +28,7 @@ export class RentedBooksService implements Service {
 
     if (!checkBookExists) throw new AppError('This book does not exist', 404)
 
-    const rentedBook = this.booksRepository.rentedBook(isbn, rented)
+    const rentedBook = this.booksRepository.rentedBook(isbn, user_email, rented)
 
     return rentedBook
   }
