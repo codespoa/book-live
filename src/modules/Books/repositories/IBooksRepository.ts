@@ -37,5 +37,9 @@ export default interface IBooksRepository {
     user_email: string,
     rented: boolean
   ): Promise<any> | undefined
-  // unrentedBook(id: string, bookId: string): Promise<any> | undefined
+  rentedBookForUser(isbn: number, user_email: string): Promise<any> | undefined
+  unrentedBookForUser(
+    isbn: number,
+    user_email: string
+  ): Promise<any> | undefined
 }

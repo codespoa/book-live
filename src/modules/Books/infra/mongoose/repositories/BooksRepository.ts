@@ -1,4 +1,7 @@
+const { ObjectId } = require('mongoose').Types
+
 import Book from '@modules/Books/infra/mongoose/entities/Book'
+import User from '@modules/Users/infra/mongoose/entities/User'
 import {
   ICreateBookDTO,
   IReturnBookDTO,
@@ -92,6 +95,42 @@ class BooksRepository implements IBooksRepository {
     )
 
     return rentABook
+  }
+
+  public async rentedBookForUser(
+    isbn: number,
+    user_email: string
+  ): Promise<any> | undefined {
+    const book = await Book.findOne({ isbn })
+    const bookId = ObjectId(book._id)
+
+    return await User.findOneAndUpdate(
+      { email: user_email },
+      {
+        $push: {
+          rented_books: { _id: bookId },
+        },
+      },
+      { new: true }
+    )
+  }
+
+  public async unrentedBookForUser(
+    isbn: number,
+    user_email: string
+  ): Promise<any> | undefined {
+    const book = await Book.findOne({ isbn })
+    const bookId = ObjectId(book._id)
+
+    return await User.findOneAndUpdate(
+      { email: user_email },
+      {
+        $pull: {
+          rented_books: { _id: bookId },
+        },
+      },
+      { new: true }
+    )
   }
 }
 

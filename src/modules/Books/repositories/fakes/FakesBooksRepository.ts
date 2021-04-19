@@ -109,4 +109,21 @@ export default class BooksRepository implements IBooksRepository {
 
     return this.books[findIndex]
   }
+
+  public async rentedBookForUser(
+    isbn: number,
+    user_email: string
+  ): Promise<any> | undefined {
+    const find = this.books.find((book) => book.isbn === isbn)
+
+    return find
+  }
+  public async unrentedBookForUser(
+    isbn: number,
+    user_email: string
+  ): Promise<any> | undefined {
+    const find = this.books.find((book) => book.isbn === isbn)
+
+    return find
+  }
 }

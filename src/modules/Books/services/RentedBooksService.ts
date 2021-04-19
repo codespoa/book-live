@@ -30,6 +30,12 @@ export class RentedBooksService implements Service {
 
     const rentedBook = this.booksRepository.rentedBook(isbn, user_email, rented)
 
+    if (rented) {
+      this.booksRepository.rentedBookForUser(isbn, user_email)
+    } else {
+      this.booksRepository.unrentedBookForUser(isbn, user_email)
+    }
+
     return rentedBook
   }
 }

@@ -5,7 +5,7 @@ import IReturnUserDTO from '@modules/Users/dtos/IReturnUserDTO'
 
 class UsersRepository implements IUsersRepository {
   public async getAllUsers(): Promise<IReturnUserDTO[]> | undefined {
-    const allUsers = await User.find({})
+    const allUsers = await User.find({}).populate('rented_books._id')
 
     return allUsers
   }
@@ -25,9 +25,6 @@ class UsersRepository implements IUsersRepository {
 
     return findUser
   }
-  // public async findById(id: string): Promise<IReturnUserDTO | undefined> {}
-  // public async save(user: IcreateUser): Promise<IReturnUserDTO> {}
-  // public async remove(id: string): Promise<void> {}
 }
 
 export default UsersRepository
