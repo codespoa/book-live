@@ -1,17 +1,20 @@
 import { Request, Response } from 'express'
-import AuthenticateUserService from '@modules/Users/services/AuthenticateUserService'
+import { RentedBooksService } from '@modules/Books/services'
+import BooksRepository from '@modules/Books/infra/mongoose/repositories/BooksRepository'
 import UsersRepository from '@modules/Users/infra/mongoose/repositories/UsersRepository'
 
 export default class RentedBooksController {
-  public async create(request: Request, response: Response): Promise<Response> {
-    const { email, password } = request.body
+  public async rented(request: Request, response: Response): Promise<Response> {
+    const { isbn, user_email, rented } = request.body
 
-    const userRepository = new UsersRepository()
+    const booksRepository = new BooksRepository()
+    const usersRepository = new UsersRepository()
 
-    const authenticateUser = await new AuthenticateUserService(
-      userRepository
-    ).execute({ email, password })
+    const rentedBook = await new RentedBooksService(
+      booksRepository,
+      usersRepository
+    ).execute({ isbn, user_email, rented })
 
-    return response.json(authenticateUser)
+    return response.json(rentedBook)
   }
 }
